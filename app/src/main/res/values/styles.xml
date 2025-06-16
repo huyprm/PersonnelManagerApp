@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BottomNavTextStyle" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item> <!-- Chữ in đậm -->
+    </style>
+
+    <style name="RoundedSquareFAB" parent="">
+        <item name="cornerSize">20dp</item>
+    </style>
+    <style name="CircleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item> <!-- Bo góc 50% để thành hình tròn -->
+    </style>
+
+    <style name="FunctionCard">
+        <item name="cardElevation">1dp</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">130dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="FunctionIconCard">
+        <item name="cardBackgroundColor">#A4D1E2</item>
+        <item name="cardCornerRadius">48dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_gravity">center_horizontal|top</item>
+    </style>
+
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@drawable/dialog_background</item>
+    </style>
+</resources>

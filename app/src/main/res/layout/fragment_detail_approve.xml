@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="context"
+            type="android.content.Context" />
+        <variable
+            name="decision"
+            type="com.managerapp.personnelmanagerapp.domain.model.Decision" />
+        <import type="com.managerapp.personnelmanagerapp.utils.DateTimeUtils"/>
+        <import type="android.view.View"/>
+        <import type="com.managerapp.personnelmanagerapp.utils.CurrencyUtils"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".presentation.decision.ui.DetailApproveFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="?attr/colorPrimary"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+                <ImageButton
+                    android:id="@+id/backBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/ic_arrow_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/decision_detail_title"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/helpBtn"
+                    app:layout_constraintStart_toEndOf="@+id/backBtn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/helpBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/ic_help"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefresh"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/mainContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="14dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/decision_info_title"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:layout_marginTop="16dp"
+                            android:textColor="@color/black" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"/>
+
+                        <include layout="@layout/layout_decision_info"
+                            app:decision="@{decision}"
+                            app:context="@{context}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/signer_info_title"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:visibility="@{decision.signer != null ? View.VISIBLE : View.GONE}"
+                            android:layout_marginTop="16dp"
+                            android:textColor="@color/black" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"/>
+
+                        <include layout="@layout/layout_signer_info"
+                            app:decision="@{decision}"
+                            android:visibility="@{decision.signer != null ? View.VISIBLE : View.GONE}"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/user_info_title"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:layout_marginTop="16dp"
+                            android:textColor="@color/black" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"/>
+
+                        <include layout="@layout/layout_user_info"
+                            app:decision="@{decision}" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"
+                            android:visibility="@{decision.position != null ? View.VISIBLE : View.GONE}"/>
+
+                        <include layout="@layout/layout_position_info"
+                            app:decision="@{decision}"
+                            android:id="@+id/positionCard"
+                            android:visibility="gone" />
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"
+                            android:visibility="@{decision.attachment != null ? View.VISIBLE : View.GONE}"/>
+
+                        <include layout="@layout/layout_attachment"
+                            app:decision="@{decision}"
+                            android:id="@+id/attachmentCard"
+                            android:visibility="gone"/>
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"
+                            android:visibility="@{decision.salaryPromotion != null ? View.VISIBLE : View.GONE}"/>
+
+                        <include layout="@layout/layout_salary_promotion"
+                            app:decision="@{decision}"
+                            android:id="@+id/salaryPromotionLayout"
+                            android:visibility="gone"/>
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"
+                            android:visibility="@{decision.seniorityAllowanceRule != null ? View.VISIBLE : View.GONE}"/>
+
+                        <include layout="@layout/layout_seniority_allowance"
+                            app:decision="@{decision}"
+                            android:id="@+id/seniorityAllowanceCard"
+                            android:visibility="gone"/>
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"/>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="500dp"
+                            android:padding="5dp"
+                            android:background="@drawable/button_background_3">
+                            <WebView
+                                android:id="@+id/decisionWebView"
+                                android:layout_width="match_parent"
+                                android:layout_height="500dp"
+                                android:background="@drawable/button_background_3"/>
+                        </FrameLayout>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:visibility="@{decision.signer != null ? View.GONE : View.VISIBLE}"/>
+
+                        <LinearLayout
+                            android:id="@+id/buttonContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="@{decision.signer != null ? View.GONE : View.VISIBLE}"
+                            android:gravity="center">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnDelete"
+                                android:layout_width="0dp"
+                                android:layout_height="56dp"
+                                android:layout_weight="1"
+                                android:text="@string/action_delete"
+                                app:cornerRadius="12dp"
+                                android:textColor="@color/red"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+                            <Space
+                                android:layout_width="16dp"
+                                android:layout_height="1dp"/>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnPrint"
+                                android:layout_width="0dp"
+                                android:layout_height="56dp"
+                                android:layout_weight="1"
+                                android:text="@string/action_print"
+                                app:cornerRadius="12dp"
+                                android:textColor="@color/red"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+                            <Space
+                                android:layout_width="16dp"
+                                android:layout_height="1dp"/>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnApprove"
+                                android:layout_width="0dp"
+                                android:layout_height="56dp"
+                                android:layout_weight="1"
+                                android:text="@string/action_sign"
+                                app:cornerRadius="12dp"
+                                android:textColor="@android:color/white"
+                                android:backgroundTint="@color/green"/>
+                        </LinearLayout>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp" />
+                    </LinearLayout>
+                </ScrollView>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header">
+
+                <include
+                    android:id="@id/errorView"
+                    layout="@layout/view_error_state"
+                    android:visibility="gone" />
+
+                <include
+                    android:id="@+id/progressOverlay"
+                    layout="@layout/progress_overlay_white"
+                    android:visibility="gone"
+                    />
+                <include
+                    layout="@layout/progress_overlay"
+                    android:id="@+id/progressBar"
+                    android:visibility="gone"/>
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+</layout>

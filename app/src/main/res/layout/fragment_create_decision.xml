@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".presentation.decision.ui.CreateDecisionFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp">
+
+            <ImageButton
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/ic_arrow_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/create_decision_title"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/helpBtn"
+                app:layout_constraintStart_toEndOf="@+id/backBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/helpBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/ic_help"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Form Input -->
+        <ScrollView
+            android:id="@+id/formScroll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="16dp"
+            android:fillViewport="false"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/individualSelectionLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <!-- Search Section -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/search_personnel_label"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/dark_gray"
+                        android:layout_marginBottom="8dp"/>
+
+                    <EditText
+                        android:id="@+id/searchUserEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="@string/search_user_hint"
+                        android:inputType="text"
+                        android:drawableStart="@drawable/ic_search"
+                        android:drawableTint="@color/dark_gray"
+                        android:drawablePadding="10dp"
+                        android:padding="12dp"
+                        android:textSize="16sp"
+                        android:background="@drawable/edittext_background"
+                        android:layout_marginBottom="8dp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/searchResultRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:maxHeight="300dp"/>
+
+                    <!-- Selected Users Section -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/selected_personnel_label"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/dark_gray"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/employeeId"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="@string/employee_id_hint"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/button_background_3"
+                        android:padding="15dp"/>
+
+                    <TextView
+                        android:id="@+id/employeeName"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="@string/employee_name_hint"
+                        android:layout_marginTop="15dp"
+                        android:padding="15dp"
+                        android:textSize="15dp"
+                        android:background="@drawable/button_background_3"
+                        android:inputType="text" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/decision_info_label"
+                    android:textSize="20sp"
+                    android:layout_marginTop="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_gray"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/decision_value_label_specical"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_gray"
+                    android:layout_marginTop="15dp"/>
+                <EditText
+                    android:id="@+id/decisionValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="@string/decision_value_hint"
+                    android:layout_marginTop="15dp"
+                    android:padding="15dp"
+                    android:textSize="15dp"
+                    android:background="@drawable/button_background_3"
+                    android:inputType="numberDecimal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/decision_content_label_specical"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_gray"
+                    android:layout_marginTop="15dp"/>
+
+                <EditText
+                    android:id="@+id/decisionContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/decision_content_hint"
+                    android:inputType="textMultiLine"
+                    android:layout_marginTop="15dp"
+                    android:padding="15dp"
+                    android:textSize="15dp"
+                    android:background="@drawable/button_background_3"
+                    android:minLines="1"
+                    android:maxLines="3"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/decision_type_label_specical"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_gray"
+                    android:layout_marginTop="15dp"/>
+
+                <Spinner
+                    android:id="@+id/decisionTypeSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="15dp"
+                    android:textSize="15dp"
+                    android:padding="15dp"
+                    android:background="@drawable/button_background_3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/issue_date_label"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_gray"
+                    android:layout_marginTop="16dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/decisionDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/button_background_3">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/schedule"
+                        android:layout_marginStart="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/textStartDay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/effective_date_label_specical"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_gray"
+                    android:layout_marginTop="16dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/effectiveDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/button_background_3">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="20dp"
+                        android:background="@drawable/schedule"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textEndDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/optionalSpinnerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/optional_info_label"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_gray"
+                    android:layout_marginTop="15dp"/>
+
+                <Spinner
+                    android:id="@+id/optionalSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:padding="15dp"
+                    android:background="@drawable/button_background_3"
+                    android:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/submitBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:text="@string/submit_button"
+                    android:background="@drawable/button_background"
+                    android:backgroundTint="?attr/colorPrimary"/>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        layout="@layout/progress_overlay"
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</FrameLayout>
